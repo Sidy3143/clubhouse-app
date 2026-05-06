@@ -1,5 +1,6 @@
 const db = require("../db/queries");
 const passport = require("passport");  
+const bcrypt = require('bcryptjs');
 const {body, validationResult, matchedData} = require("express-validator");
 
 const validateUser = [
@@ -18,6 +19,14 @@ const validateUser = [
 const validateLogin = [
   body("username").notEmpty().withMessage("Username is required"),
   body("password").notEmpty().withMessage("Password is required"),
+  body("password").custom(async (value, { req }) => {
+    const user = await db.getUserByUsername(req.body.username);
+    const isMatch = user ? await bcrypt.compare(value, user.password) : false;
+    if (!isMatch) {
+      throw new Error("Invalid username or password");
+    }
+    return true;
+  }),
 ];
 
 async function createUserPost(req, res) {

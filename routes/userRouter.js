@@ -6,7 +6,7 @@ const usersController = require("../controllers/usersController");
 
 usersRouter.get('/', async (req, res) => {
     const posts = await db.getUsersPosts();
-    res.render('index', {user: req.user, posts: posts});
+    res.render('index', {user: req.user, posts: posts });
 });
 
 usersRouter.get('/sign-up', usersController.createUserGet);

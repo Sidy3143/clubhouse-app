@@ -2,6 +2,12 @@
 
 const { Client } = require("pg");
 require("dotenv").config();
+const bcrypt = require('bcryptjs');
+
+const password1 = "password123";
+const password2 = "password456";
+const hashedPassword1 = bcrypt.hashSync(password1, 10);
+const hashedPassword2 = bcrypt.hashSync(password2, 10);
 
 const SQL = `
 DROP TABLE IF EXISTS posts;
@@ -19,8 +25,8 @@ CREATE TABLE IF NOT EXISTS users (
 
 INSERT INTO users (first_name, last_name, username, password, membership, is_admin) 
 VALUES
-  ('Amando', 'Garcia', 'amando', 'password123', TRUE, TRUE),
-  ('Charles', 'Johnson', 'charles', 'password456', FALSE, FALSE);
+  ('Amando', 'Garcia', 'amando', '${hashedPassword1}', TRUE, TRUE),
+  ('Charles', 'Johnson', 'charles', '${hashedPassword2}', FALSE, FALSE);
 
   CREATE TABLE IF NOT EXISTS posts (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
