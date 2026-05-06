@@ -1,0 +1,54 @@
+<!-- sign-up-form.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Sign Up</title>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <% if (errors && errors.length > 0) { %>
+        <div class="errors" style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 15px;">
+            <ul>
+                <% errors.forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }); %>
+            </ul>
+        </div>
+    <% } %>
+    <form action="/sign-up" method="post">
+        <div>
+            <label for="first-name">First Name:</label>
+            <input type="text" name="first-name" id="first-name" placeholder="First Name">
+        </div>
+
+        <div>
+            <label for="last-name">Last Name:</label>
+            <input type="text" name="last-name" id="last-name" placeholder="Last Name">
+        </div>
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" placeholder="Username">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="Password">
+        </div>
+        <div>
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password">
+        </div>
+        <div>
+            <label for="membership-code">Membership Code (Optional):</label>
+            <input type="text" name="membership-code" id="membership-code" placeholder="Membership Code">
+        </div>
+        <div>
+            <label for="is-admin">Admin Code:</label>
+            <input type="number" name="is-admin" id="is-admin">
+        </div>
+        <button type="submit">Sign Up</button>
+    </form>
+</body>
+</html>

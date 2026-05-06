@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Beome a member</title>
+</head>
+<body>
+    <% if (errors && errors.length > 0) { %>
+        <div class="errors" style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 15px;">
+            <ul>
+                <% errors.forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }); %>
+            </ul>
+        </div>
+    <% } %>
+    <form action="/become-member" method="POST">
+        <div>
+            <label for="membership-code">Membership Code:</label>
+            <input type="text" id="membership-code" name="membership-code" placeholder="Enter membership code">
+        </div>
+        <button type="submit">Become a Member</button>
+    </form>
+</body>
+</html>

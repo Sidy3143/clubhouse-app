@@ -1,0 +1,32 @@
+{
+  "name": "clubhouse-app",
+  "version": "1.0.0",
+  "description": "exclusive clubhouse where only members can see the author of a post.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sidy3143/clubhouse-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sidy3143/clubhouse-app/issues"
+  },
+  "homepage": "https://github.com/Sidy3143/clubhouse-app#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.20.0"
+  }
+}

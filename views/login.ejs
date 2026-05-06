@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <% if (errors && errors.length > 0) { %>
+        <div class="errors" style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 15px;">
+            <ul>
+                <% errors.forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }); %>
+            </ul>
+        </div>
+    <% } %>
+    <form action="/login" method="post">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" placeholder="Username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!-- index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Clubhouse</h1>
+    <% if (!user) { %>
+        <a href="sign-up">Sign Up</a>
+        <a href="login">Login</a>
+    <% } %>
+
+    <% if (user) { %>
+        <h2>Welcome back, <%= user.username %>!</h2>
+        <a href="create-post">Create Post </a>
+        <% if (!user.is_admin) { %>
+            <a href="become-admin">Become Admin</a>
+        <% } %>
+        <a href="logout">Log out</a>
+    <% } else { %>
+        <h2>Please log in to see your profile.</h2>
+    <% } %>
+
+    <h2>Recent Posts</h2>
+    <% if (user && user.membership) { %>
+            <p>You have a valid membership code.</p>
+            <% if (posts && posts.length > 0) { %>
+                <% posts.forEach(post => { %>
+                    <div class="post">
+                        <p>Author:<strong><%= post.username %></strong> </p>
+                        <p>Content: <%= post.content %></p>   
+                        <p><em>Posted on : <%= post.created_at.toLocaleString() %></em></p>
+                        <% if (user.is_admin || post.user_id === user.id) { %>
+                            <form action="/edit-post/<%=post.id %>" method="GET">
+                                <button type="submit">Edit Post</button>
+                            </form>
+                            <form action="/delete-post/<%=post.id %>" method="POST">
+                                <button type="submit">Delete Post</button>
+                            </form>
+                        <% } %>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p>No posts yet.</p>
+            <% } %>
+    <% } else { %>
+        <% if (user) { %>
+            <p>You do not have a membership code.</p>
+            <a href="become-member">Become a Member</a>
+        <% } %>
+        <% if (posts && posts.length > 0) { %>
+            <% posts.forEach(post => { %>
+                <div class="post">
+                    <p>Author:<strong>Anonymous</strong> </p>
+                    <p>Content: <%= post.content %></p>
+                    <p><em>Posted on : <%= post.created_at.toLocaleString() %></em></p>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No posts yet.</p>
+        <% } %>
+    <% } %></body>
+</html>
